@@ -11,7 +11,7 @@ default_args={
     'retries':1,
     'retry_dealy':timedelta(minutes=2)
 }
-
+# Dag Creation
 with DAG(
     dag_id='bash_check',
     description='Bash Operator dag',
