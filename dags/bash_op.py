@@ -1,5 +1,7 @@
 from airflow import DAG
+
 from airflow.operators.bash import BashOperator
+from airflow.operators.dummy import DummyOperator
 
 import pendulum
 from datetime import datetime, timedelta
@@ -22,5 +24,9 @@ with DAG(
         task_id='first_task',
         bash_command="echo hello world!!"
     )
+    dummy_operator_task = DummyOperator(
+    task_id = 'dummy_operator_task',
+    dag = dag
+)
     
-    task1
+    task1>> dummy_operator_task
