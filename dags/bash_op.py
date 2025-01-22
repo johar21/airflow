@@ -2,6 +2,7 @@ from airflow import DAG
 
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
+from airflow.operators.email import EmailOperator
 
 import pendulum
 from datetime import datetime, timedelta
@@ -29,4 +30,11 @@ with DAG(
     dag = dag
 )
     
-    task1>> dummy_operator_task
+    email_task=EmailOperator(
+        task_id='task_email',
+        to='joharamandeep99@gmail.com',
+        subject='ETL Task',
+        html_content='this is test'
+    )
+    
+    task1>> dummy_operator_task >>email_task
